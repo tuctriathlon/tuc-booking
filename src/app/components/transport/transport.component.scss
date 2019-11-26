@@ -1,0 +1,18 @@
+@import "src/styles";
+.content-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 10px;
+  padding: 10px;
+}
+
+.car-card, .user-card {
+  padding: 10px;
+  min-height: 60px;
+  border: solid 1px $yellow-TUC;
+}
+
+.drag-placeholder {
+  border: dotted 3px $yellow-TUC;
+  min-height: 60px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

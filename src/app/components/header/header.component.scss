@@ -1,0 +1,9 @@
+@import "src/styles";
+#header {
+  background: linear-gradient(to right, $yellow-TUC 70%, black);
+}
+#menu {
+  background-color: #000000;
+  color: $yellow-TUC;
+  border-bottom: solid 2px $yellow-TUC;
+}

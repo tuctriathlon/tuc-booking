@@ -1,0 +1,12 @@
+<nav class="navbar" id="header">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="../assets/images/logo_tuc.jpg" alt="TUC Triathlon" height="50px"/></a>
+  </div>
+</nav>
+<nav class="container-fluid" id="menu" *ngIf="links.length">
+  <ul class="container d-flex justify-content-between m-auto nav">
+    <li class="nav-item" *ngFor="let link of links">
+      <div class="nav-link p-1" [routerLink]="link.route">{{link.name}}</div>
+    </li>
+  </ul>
+</nav>

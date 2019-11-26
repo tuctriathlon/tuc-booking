@@ -1,19 +1,10 @@
 <div class="vw-100 vh-100 background">
-  <nav class="navbar" id="header">
-    <div class="container">
-      <a class="navbar-brand" href="#"><img src="../assets/images/logo_tuc.jpg" alt="TUC Triathlon" height="50px"/></a>
-    </div>
-  </nav>
-  <nav class="container-fluid" id="menu">
-    <ul class="container d-flex justify-content-between m-auto nav">
-      <li class="nav-item"><div class="nav-link p-1">menu 1</div></li>
-      <li class="nav-item"><div class="nav-link p-1">menu 2</div></li>
-      <li class="nav-item"><div class="nav-link p-1">menu 3</div></li>
-      <li class="nav-item"><div class="nav-link p-1">menu 4</div></li>
-    </ul>
-  </nav>
+  <app-header [links]="menuItems"></app-header>
   <div id="content" class="container-fluid">
-    <router-outlet></router-outlet>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 
 </div>

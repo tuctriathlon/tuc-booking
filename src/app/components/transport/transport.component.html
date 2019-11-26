@@ -1,0 +1,44 @@
+<div class="container-fluid d-flex justify-content-between">
+  <div class="col-2 content-container">
+    <h3>Users</h3>
+    <div id="usersWithoutCar" cdkDropList [cdkDropListData]="users" (cdkDropListDropped)="addPassenger($event)">
+      <div class="user-card" *ngFor="let user of users" cdkDrag>
+        <div class="drag-placeholder" *cdkDragPlaceholder></div>
+        {{user.name}}
+      </div>
+    </div>
+  </div>
+  <div class="col-8 content-container">
+    <h3>Cars</h3>
+    <div *ngFor="let car of cars" >
+      <div class="car-card" cdkDropList (cdkDropListDropped)="addPassenger($event)">{{car.name}}</div>
+    </div>
+  </div>
+  <div class="col-2 content-container">
+    <h3>Bikes</h3>
+    <div *ngFor="let bike of bikes">
+      {{bike}}
+    </div>
+  </div>
+</div>
+
+<!--<div class="board">-->
+<!--  <div class="card-list mat-elevation-z1" *ngFor="let track of tracks; let i=index">-->
+
+<!--    <h2 cdkDragHandle class="mat-h2">{{track.title}}</h2>-->
+
+<!--    <div class="card-list-content" cdkDropList [id]="track.id" [cdkDropListData]="track.tasks" [cdkDropListConnectedTo]="trackIds"-->
+<!--         (cdkDropListDropped)="onTaskDrop($event)" [ngStyle]="{'background-color': trackColor[i]}">-->
+
+
+<!--      <mat-card style="margin: 2%;" *ngFor="let task of track.tasks" cdkDrag>-->
+<!--        &lt;!&ndash; Use the mat-card-content to add the proper spacing. &ndash;&gt;-->
+<!--        <mat-card-content>-->
+<!--          <h2>{{task.title}}</h2>-->
+<!--          {{task.description}}-->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
