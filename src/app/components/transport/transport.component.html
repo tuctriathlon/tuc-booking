@@ -1,44 +1,39 @@
 <div class="container-fluid d-flex justify-content-between">
-  <div class="col-2 content-container">
+  <div class="col-2 content-container"
+       id="usersWithoutCar"
+       cdkDropList
+       [cdkDropListData]="users"
+       [cdkDropListConnectedTo]="tableIds('usersWithoutCar')"
+       (cdkDropListDropped)="drop($event)">
     <h3>Users</h3>
-    <div id="usersWithoutCar" cdkDropList [cdkDropListData]="users" (cdkDropListDropped)="addPassenger($event)">
-      <div class="user-card" *ngFor="let user of users" cdkDrag>
-        <div class="drag-placeholder" *cdkDragPlaceholder></div>
-        {{user.name}}
+    <div class="user-card" *ngFor="let user of users" cdkDrag>
+      <div class="drag-placeholder" *cdkDragPlaceholder></div>
+      {{user.name}}
+    </div>
+  </div>
+  <div class="col-8 content-container align-items-stretch" id="cars">
+    <h3>Cars</h3>
+    <div class="card d-flex flex-row"
+         *ngFor="let car of cars"
+         [id]="'car' + car.id"
+         cdkDropList
+         [cdkDropListData]="car.passengers"
+         [cdkDropListConnectedTo]="tableIds('car' + car.id)"
+         (cdkDropListDropped)="drop($event)">
+      <div class="col-3">{{car.name}} {{car.canAddPassenger}}</div>
+      <div class="col-4">
+        <div *ngFor="let passenger of car.passengers" cdkDrag>
+          <span>{{passenger.name}}</span>
+        </div>
       </div>
     </div>
+
   </div>
-  <div class="col-8 content-container">
-    <h3>Cars</h3>
-    <div *ngFor="let car of cars" >
-      <div class="car-card" cdkDropList (cdkDropListDropped)="addPassenger($event)">{{car.name}}</div>
-    </div>
-  </div>
-  <div class="col-2 content-container">
+  <div class="col-2 content-container" id="bikeRemaining" cdkDropList [cdkDropListData]="passengers" [cdkDropListConnectedTo]="tableIds('bikeRemaining')" (cdkDropListDropped)="drop($event)">
     <h3>Bikes</h3>
-    <div *ngFor="let bike of bikes">
-      {{bike}}
+    <div *ngFor="let bike of passengers" class="user-card" cdkDrag>
+      <div class="drag-placeholder" *cdkDragPlaceholder></div>
+      {{bike.name}}
     </div>
   </div>
 </div>
-
-<!--<div class="board">-->
-<!--  <div class="card-list mat-elevation-z1" *ngFor="let track of tracks; let i=index">-->
-
-<!--    <h2 cdkDragHandle class="mat-h2">{{track.title}}</h2>-->
-
-<!--    <div class="card-list-content" cdkDropList [id]="track.id" [cdkDropListData]="track.tasks" [cdkDropListConnectedTo]="trackIds"-->
-<!--         (cdkDropListDropped)="onTaskDrop($event)" [ngStyle]="{'background-color': trackColor[i]}">-->
-
-
-<!--      <mat-card style="margin: 2%;" *ngFor="let task of track.tasks" cdkDrag>-->
-<!--        &lt;!&ndash; Use the mat-card-content to add the proper spacing. &ndash;&gt;-->
-<!--        <mat-card-content>-->
-<!--          <h2>{{task.title}}</h2>-->
-<!--          {{task.description}}-->
-<!--        </mat-card-content>-->
-<!--      </mat-card>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->

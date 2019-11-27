@@ -4,6 +4,7 @@ import {User} from "../../models/user.model";
 import {Car} from "../../models/car.model";
 import {Bike} from "../../models/bike.model";
 import {CarService} from "../../services/car.service";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-transport',
@@ -12,6 +13,7 @@ import {CarService} from "../../services/car.service";
 })
 export class TransportComponent implements OnInit {
   public users: User[] = [];
+  public passengers: User[] = [];
   public cars: Car[] = [];
   public bikes: Bike[] = [];
 
@@ -19,12 +21,25 @@ export class TransportComponent implements OnInit {
               private carService: CarService) { }
 
   ngOnInit() {
-    this.users = this.userService.getAll();
+    this.users = this.userService.getRemainingUser();
     this.cars = this.carService.getAll();
   }
 
-  addPassenger(event) {
-    console.log(event);
+  tableIds(value: string): string[] {
+    return this.cars.map(c => `car${c.id}`).concat(['usersWithoutCar', 'bikeRemaining']).filter(id => id !== value)
+  }
+  canAddPassenger(car:Car):boolean {
+    return car.canAddPassenger
+  }
+  drop(event: CdkDragDrop<User[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
 
 }

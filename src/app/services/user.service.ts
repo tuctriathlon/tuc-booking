@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core';
 import {User} from "../models/user.model";
+import {CarService} from "./car.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private users: User[] = []
-  constructor() {
-    this.users.push(User.Create('test1', 'test1', 'test1@mail.fr'));
-    this.users.push(User.Create('test2', 'test2', 'test2@mail.fr'));
-    this.users.push(User.Create('test3', 'test3', 'test3@mail.fr'));
-    this.users.push(User.Create('test4', 'test4', 'test4@mail.fr'));
-    this.users.push(User.Create('test5', 'test5', 'test5@mail.fr'));
+  constructor(private carService: CarService) {
+    for( let i = 0; i < 15; i++) {
+      this.users.push(User.Create(`test${i}`, `test${i}`, `test${i}@mail.fr`));
+    }
   }
 
   public getAll(): User[] {
     return this.users;
+  }
+
+  public getRemainingUser(): User[] {
+    return this.users.filter(u => !this.getAllPassengers().some(p => p === u))
+  }
+
+  public getAllPassengers(): User[] {
+    const passengers = [];
+    this.carService.getAll().forEach(car => {
+      passengers.push(car.passengers)
+    })
+    return passengers;
   }
 }
