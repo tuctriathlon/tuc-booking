@@ -1,19 +1,33 @@
-export class User {
-  id: string;
+import {Resource} from "./resource.model";
+
+export class User extends Resource<User> {
   firstName: string;
   lastName: string;
   mail: string;
+
+  constructor() {
+    super();
+  }
 
   get name ():string {
     return this.firstName + ' ' + this.lastName;
   }
 
-  public static Create (firstName: string, lastName: string, mail:string): User {
+  public static Create (data: any): User {
     const user = new User();
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.mail = mail;
-    user.id = Math.floor(Math.random()*10000).toString(10);
+    user.fromJson(data);
     return user;
+  }
+
+  public fromJson(data: any): void {
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
+    this.mail = data.mail;
+    this.key = data.key;
+    return undefined;
+  }
+
+  public toDbFormat(): any {
+    return {firstName: this.firstName, lastName: this.lastName, mail: this.mail}
   }
 }

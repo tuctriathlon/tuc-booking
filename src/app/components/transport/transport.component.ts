@@ -1,27 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user.model";
 import {Car} from "../../models/car.model";
 import {Bike} from "../../models/bike.model";
 import {CarService} from "../../services/car.service";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-transport',
   templateUrl: './transport.component.html',
   styleUrls: ['./transport.component.scss']
 })
-export class TransportComponent implements OnInit {
-  public users: User[] = [];
+export class TransportComponent implements OnInit, OnDestroy {
+  public users;
   public passengers: User[] = [];
   public cars: Car[] = [];
   public bikes: Bike[] = [];
+  private subscribtions: Subscription[];
 
   constructor(private userService: UserService,
-              private carService: CarService) { }
+              private carService: CarService) {
+    this.subscribtions = [];
+  }
 
   ngOnInit() {
-    this.users = this.userService.getRemainingUser();
+    // this.userService.getAll().subscribe(res => {
+    //   this.users = res;
+    // });
     this.cars = this.carService.getAll();
   }
 
@@ -42,4 +48,9 @@ export class TransportComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscribtions.forEach(sub => {
+      sub.unsubscribe();
+    })
+  }
 }

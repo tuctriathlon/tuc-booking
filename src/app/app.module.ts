@@ -11,6 +11,9 @@ import { TransportComponent } from './components/transport/transport.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { AdminComponent } from './components/admin/admin.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {environment} from "../environments/environment";
+import { AngularFireModule } from "@angular/fire";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DragDropModule
+    DragDropModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

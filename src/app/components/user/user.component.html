@@ -1,1 +1,5 @@
 <p>user works!</p>
+<button (click)="addUser()">Add User</button>
+<div *ngFor="let user of users">
+  <span>{{user.firstName}} {{user.lastName}} {{user.key}} {{user.name}}</span> <button (click)="delete(user)">Delete</button>
+</div>

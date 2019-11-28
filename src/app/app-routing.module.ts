@@ -11,7 +11,7 @@ import {AdminComponent} from "./components/admin/admin.component";
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'users', component: UserListComponent },
-  { path: 'user/:userId', component: UserComponent },
+  { path: 'user', component: UserComponent },
   { path: 'transport', component: TransportComponent },
   { path: 'rooms', component: RoomsComponent },
   { path: 'admin', component: AdminComponent },
